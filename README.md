@@ -68,3 +68,10 @@ The optimisation follows these main steps:
 - The learning rate is easy to change:
   ```matlab. python.. etc.
   learning_rate = 0.35;  % modify as needed
+
+  ## External Code Attribution
+
+This project uses the `UC.m` function authored by Christoph Spengler (University of Vienna, 2011)
+for the composite parameterisation of unitary matrices.
+
+
