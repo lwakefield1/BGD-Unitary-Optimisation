@@ -95,6 +95,6 @@ If you use or reference this repository in your work, please cite the following 
 > arXiv: 1103.3408
 
 **Note:** The file `UC.m` remains © Christoph Spengler (2011) and is not distributed under the MIT License.  
-All other code and documentation in this repository are © Liam (2025) and released under the **MIT License**.
+All other code and documentation in this repository are © Liam. Wakefield (2025) and released under the **MIT License**.
 
 
