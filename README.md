@@ -11,35 +11,41 @@ The code produces detailed convergence plots, percentile analyses, and saves bot
 
 The optimisation follows these main steps:
 
-1. **Reference Unitary Generation**  
-   A random complex matrix `A` is generated and decomposed using a QR factorisation:
-   \[
-   U_\text{ref} = Q \cdot \frac{\text{diag}(R)}{|\text{diag}(R)|}
-   \]
-   ensuring that `Uref` is unitary.
+### 1. Reference Unitary Generation
+- Generate a random complex matrix `A`.
+- Decompose it using QR factorisation:  
+  `[Q, R] = qr(A)`
+- Construct the reference unitary matrix:  
+  `U_ref = Q * diag(diag(R) ./ abs(diag(R)))`  
+  ensuring that `U_ref` is unitary.
 
-2. **Optimisation Loop (Gradient Descent)**  
-   For each simulation:
-   - Initialise a random real matrix `P`.
-   - Map `P` to a unitary matrix `Utest = UC(P)` via QR decomposition.
-   - Evaluate the cost function:
-     \[
-     C = ||U_\text{ref} - U_\text{test}||_F^2
-     \]
-   - Compute the gradient of the cost function using **finite differences**:
-     \[
-     \frac{\partial C}{\partial P_{ij}} = 
-     \frac{C(P_{ij} + \varepsilon) - C(P_{ij} - \varepsilon)}{2 \varepsilon}
-     \]
-   - Update the matrix `P` via gradient descent:
-     \[
-     P = P - \alpha \, \nabla_P C
-     \]
+---
 
-3. **Convergence Tracking**
-   - The algorithm records the cost at each iteration.
-   - Convergence is reached when the cost drops below `0.01`.
-   - Cost histories, percentiles, and iteration counts are plotted for visual inspection.
+### 2. Optimisation Loop (Gradient Descent)
+For each simulation:
+
+- Initialise a random real matrix `P`.
+- Map `P` to a unitary matrix `U_test = UC(P)` via QR decomposition.
+- Evaluate the cost function:  
+  `C = ||U_ref - U_test||_F²`
+- Compute the gradient of the cost function using finite differences:  
+  `∂C/∂P_ij ≈ (C(P_ij + ε) - C(P_ij - ε)) / (2ε)`
+- Update the matrix `P` via gradient descent:  
+  `P = P - α * ∇_P C`
+
+---
+
+### 3. Convergence and Results
+The algorithm terminates when:
+- `C < 0.01`, or  
+- the maximum iteration count is reached.
+
+The program tracks:
+- Cost per iteration  
+- Best cost achieved  
+- Best unitary matrix (`U_best`)  
+- Iteration number of the best result
+
 
 4. **Outputs**
    - Average and percentile cost plots.
