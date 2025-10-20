@@ -12,7 +12,8 @@ The code produces detailed convergence plots, percentile analyses, and saves bot
 The optimisation follows these main steps:
 
 ### 1. Reference Unitary Generation
-- Generate a random complex matrix `A`.
+- Choose the matrix dimension `d` (the algorithm constructs an `n×n` unitary matrix where `n = d`).
+- Generate a random complex matrix `A` of size `d×d`.
 - Decompose it using QR factorisation:  
   `[Q, R] = qr(A)`
 - Construct the reference unitary matrix:  
@@ -24,8 +25,8 @@ The optimisation follows these main steps:
 ### 2. Optimisation Loop (Gradient Descent)
 For each simulation:
 
-- Initialise a random real matrix `P`.
-- Map `P` to a unitary matrix `U_test = UC(P)` via QR decomposition.
+- Initialise a random real matrix `P` of size `d×d`.
+- Map `P` to a unitary matrix `U_test = UC(P)` using the composite parameterisation.
 - Evaluate the cost function:  
   `C = ||U_ref - U_test||_F²`
 - Compute the gradient of the cost function using finite differences:  
@@ -38,13 +39,14 @@ For each simulation:
 ### 3. Convergence and Results
 The algorithm terminates when:
 - `C < 0.01`, or  
-- the maximum iteration count is reached.
+- the maximum iteration count (`num_iter`) is reached.
 
 The program tracks:
 - Cost per iteration  
 - Best cost achieved  
 - Best unitary matrix (`U_best`)  
 - Iteration number of the best result
+
 
 
 4. **Outputs**
@@ -57,12 +59,14 @@ The program tracks:
 ## ⚙️ Parameters and Settings
 
 | Parameter | Symbol | Default | Description |
-|------------|--------|----------|--------------|
-| Learning rate | α | `0.35` | Step size for gradient descent updates. Affects convergence speed and stability. |
-| Epsilon | ε | `1e-6` | Perturbation step used in finite-difference gradient calculation. |
-| Iterations | *num_iter* | `50` | Maximum number of gradient descent iterations per simulation. |
-| Random seed | — | `1111` | Fixed seed for reproducibility (`rng(1111)`). |
-| Simulations | *num_simulations* | user-defined | Number of independent optimisation runs. |
+|------------|---------|----------|-------------|
+| Matrix dimension | `d` | user-defined | Size of the `d×d` unitary matrix to optimise |
+| Learning rate | `α` | 0.35 | Step size for gradient descent updates |
+| Finite difference step | `ε` | 1e-6 | Perturbation for numerical gradient estimation |
+| Iterations | `num_iter` | 50 | Maximum number of gradient descent iterations |
+| Random seed | — | 1111 | Fixed seed for reproducibility |
+| Simulations | `num_simulations` | user-defined | Number of independent optimisation runs |
+| Convergence criterion | — | `C < 0.01` | Stops optimisation when cost is below threshold |
 
 ---
 
