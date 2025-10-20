@@ -69,9 +69,26 @@ The optimisation follows these main steps:
   ```matlab. python.. etc.
   learning_rate = 0.35;  % modify as needed
 
-  ## External Code Attribution
+ ## 🧩 External Code Attribution
 
-This project uses the `UC.m` function authored by Christoph Spengler (University of Vienna, 2011)
-for the composite parameterisation of unitary matrices.
+This repository includes the `UC.m` function authored by **Christoph Spengler (University of Vienna, 2011)**,  
+which implements the *Composite Parameterisation of the Unitary Group U(d)*.
+
+The function is provided under its original academic copyright and  
+is used here solely for research and educational purposes.
+
+If you use or reference this repository in your work, please cite the following papers as requested by the author:
+
+> **Spengler, C., Huber, M., & Hiesmayr, B. C.** (2010).  
+> *A composite parameterization of unitary groups, density matrices and subspaces.*  
+> *Journal of Physics A: Mathematical and Theoretical,* 43 (38), 385306.  
+> arXiv: 1004.5252  
+>
+> **Spengler, C., Huber, M., & Hiesmayr, B. C.** (2011).  
+> *Composite parameterization and Haar measure for all unitary and special unitary groups.*  
+> arXiv: 1103.3408
+
+**Note:** The file `UC.m` remains © Christoph Spengler (2011) and is not distributed under the MIT License.  
+All other code and documentation in this repository are © Liam (2025) and released under the **MIT License**.
 
 
